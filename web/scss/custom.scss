@@ -1,0 +1,440 @@
+$color1: #0053FF; // primary blue
+$color2: #1964FF; // pale blue
+$color3: #4F6FB2; // desaturated blue
+$color4: #B2944F; // antique gold -- DO NOT USE FOR LARGE SURFACES
+$color5: #FFB100; // contrast orange
+$black:  rgba(0,0,0,0.84);
+$gray: rgba(0,0,0,0.54);
+$lightgray: rgba(0,0,0,0.26);
+$dark: #222;
+
+@import '../lib/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss';
+@import '_login.scss';
+@import '_user-list.scss';
+@import '_guideList.scss';
+@import '_admin-manage.scss';
+@import '_message.scss';
+@import '_sticky-footer.scss';
+@import '_notification.scss';
+@import '_logo';
+
+*{
+  box-sizing:border-box;
+}
+
+a{
+	text-decoration:none;
+	&:hover{
+		text-decoration: none;
+	}
+	&:focus{
+		outline: 0;
+	}
+}
+
+body {
+  padding: 51px 0 0;
+}
+
+.container {
+  &.padding {
+    padding: 25px 0;
+  }
+}
+
+.text-white{
+  color: white !important;
+}
+
+.brand{
+  letter-spacing: 3px;
+  border-bottom: 0.2ex solid $color4;
+  font-weight: 200;
+}
+
+.jumbotron{
+	background: url('../images/jumbotron2.png');
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+	min-height: 750px;
+
+  &-spacing{
+    margin: -50px 0 0; //-50 voor navbar
+    padding: 20vh 20%;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 90%;
+  }
+}
+
+.border-col{
+  &-gold{
+    border-color: $color5;
+  }
+  &-grey{
+    border-color: $lightgray;
+  }
+}
+
+.bg-col{
+	color:white;
+	border:none;
+	&-1{
+		@extend .bg-col;
+		background-color: $color1;
+	}
+	&-2{
+		@extend .bg-col;
+		background-color: $color2;
+	}
+	&-5{
+		@extend .bg-col;
+		background-color: $color5;
+	}
+	&-none{
+		@extend .bg-col;
+		background: transparent;
+	}
+}
+
+.txt-col{
+	&-1{
+		color: $color1;
+	}
+	&-2{
+		color: $color2;
+	}
+	&-5{
+		color: $color5;
+	}
+	&-lightgray{
+		color: $lightgray;
+	}
+	&-black{
+		color: $black;
+	}
+	&-gray{
+		color: $gray;
+	}
+}
+
+.call-secondary{
+	width: 150px;
+	max-width:100%;
+	white-space: nowrap;
+	padding-bottom: 2px;
+	opacity: 0.18;
+	border-bottom: 1px solid white;
+
+	/* CSS Transition */
+	-webkit-transition: opacity .2s ease-in-out;
+	-moz-transition: opacity .2s ease-in-out;
+	-ms-transition: opacity .2s ease-in-out;
+	-o-transition: opacity .2s ease-in-out;
+	transition: opacity .2s ease-in-out;
+	
+	&:hover,:focus{
+		outline: 0;
+		opacity: 1;
+		border-bottom: 1px solid $color5;
+	}
+}
+
+.para{
+	&-action{
+		line-height: 2.8ex;
+		max-width: 450px;
+	}
+}
+
+.txt-force{
+  &-36{
+    font-size: 36px;
+    line-height: 36px;
+  }
+}
+.action-container{
+  width: auto;
+  max-width: 200px;
+  &-override{
+    width: auto;
+    max-width: 250px;
+  }
+}
+
+.btn-action{
+	margin: 25px auto 0px auto;
+}
+
+.users-btn-vcenter{
+  margin-top: 40px;
+}
+
+.btn-ghost {
+	background: transparent;
+	color: #F2F2F2;
+	box-sizing: border-box;
+	border-color: white;
+	max-width:100% !important;
+
+	/* CSS Transition */
+	-webkit-transition: border .2s ease-in-out;
+	-moz-transition: border .2s ease-in-out;
+	-ms-transition: border .2s ease-in-out;
+	-o-transition: border .2s ease-in-out;
+	transition: border .2s ease-in-out;
+
+	&:hover, &:focus {
+		background: transparent;
+		color: white;
+		border-color: $color5;
+	}
+}
+
+.btn-spectre{
+  background: transparent;
+  color: $gray;
+  box-sizing: border-box;
+  border-color: $lightgray;
+
+  /* CSS Transition */
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -ms-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+
+  &:hover, &:focus {
+    background: transparent;
+    color: $black;
+    border-color: $color5;
+  }
+}
+
+.container-fluid{
+  padding: 75px 0;
+}
+
+.row-title{
+  margin: 0px 0 25px 0;
+  padding-left: 15px;
+  & small{
+    color:$black;
+  }
+}
+
+.text-muted{
+  margin-bottom: 0px;
+}
+ 
+// style used to adjust profile images into a consistent width, regardless of resolution
+.user-image{
+	max-width: 80%;
+	&-large{
+		@extend .user-image;
+		width: 360px;
+	}
+	&-medium{
+		@extend .user-image;
+		width: 240px;
+	}
+	&-small{
+		@extend .user-image;
+		width:120px;
+		min-width:120px;
+	}
+}
+
+// user page styling
+
+.media-left{
+  padding-right: 25px;
+}
+
+// CSS used to centralize icons & their tags, very touchy feel no math
+.gi{
+	&-h1{
+		top:5px;
+	}
+	&-h3{
+		top:3px;
+	}
+	&-dashboard{
+		font-size: 10ex;
+		padding: 1ex 0;
+	}
+}
+// css used to style url's
+.url{
+	&-dashboard{
+
+		/* CSS Transition */
+		-webkit-transition: color .2s ease-in-out;
+		-moz-transition: color .2s ease-in-out;
+		-ms-transition: color .2s ease-in-out;
+		-o-transition: color .2s ease-in-out;
+		transition: color .2s ease-in-out;
+
+		&:hover{
+			color: $color5;
+		}
+	}
+}
+// padders
+.pad{
+  &-l{
+    &-5{
+      padding-left: 5px;
+    }
+  }
+}
+// reset forcer, may change later
+.container-activity{
+  margin-top:-50px;
+  padding-top:0;
+  padding-bottom:25px;
+}
+
+// style for the ratings
+
+.rating{
+  display: block;
+  color: $color5;
+}
+
+// bring it you stupid navbar
+// update: git rekt
+
+.navbar{
+	&-brand{
+		color: #f2f2f2 !important;
+	}
+	&-inverse{
+		background-color: $color1;
+		border: none;
+		& a{
+			color:#f2f2f2;
+			&:hover{
+				color:white;
+			}
+		}
+	}
+}
+
+.navbar-inverse .navbar-nav > li > a{
+  color: #f2f2f2;
+}
+
+.navbar-nav > li:hover{
+  background-color: $color2;
+}
+
+.navbar-inverse .navbar-nav > .active > a{
+  background-color: $color2;
+  &:hover{
+    background-color: $color2;
+  }
+}
+
+.nav .open > a{
+	background-color: $color2 !important;
+}
+
+[role=button]{
+	color: #f2f2f2 !important;
+	&:hover{
+		background-color: $color2 !important;
+	}
+}
+
+//lots o margins, expand accordingly
+.margin{
+  &-alot{
+    &-t{
+      margin-top: 50px;
+    }
+    &-b{
+      margin-bottom: 50px;
+    }
+  }
+  &-abit{
+    &-t{
+      margin-top: 25px;
+    }
+    &-b{
+      margin-bottom: 25px;
+    }
+  }
+  &-alil{
+    &-t{
+      margin-top: 10px;
+    }
+    &-b{
+      margin-bottom: 10px;
+    }
+    &-l{
+      margin-left: 10px;
+    }
+  }
+}
+
+// dirty dirty hackfixes
+.forceLeft{
+  float:left;
+}
+
+// styling related to fullcalendar, use important for overrides. load order glitch
+.fc-day{
+  cursor:pointer;
+}
+.fc-day-number{
+  text-align: center !important;
+  font-size: 24px;
+}
+.fc-event{
+  border: none !important;
+  width: 100%;
+  border-radius: 0 !important;
+  line-height: 2em !important;
+  text-align: center;
+  white-space: normal !important;
+  cursor: pointer;
+}
+
+.fc-day-grid-event{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.fc-content-skeleton, .fc-content-skeleton table{
+  height: 100%;
+}
+
+.fc-event-container{
+  vertical-align:bottom !important;
+}
+
+.fc-content{
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  padding: 0px 10px;
+}
+.fc-today{
+  background-color: none;
+}
+.fc-state-highlight{
+  background-color: #fbfbfb !important;
+}
+
+.eventDetails{
+  max-height: 0;
+  /* CSS Transition */
+  -webkit-transition: height .2s ease-in-out;
+  -moz-transition: height .2s ease-in-out;
+  -ms-transition: height .2s ease-in-out;
+  -o-transition: height .2s ease-in-out;
+  transition: height .2s ease-in-out;
+}

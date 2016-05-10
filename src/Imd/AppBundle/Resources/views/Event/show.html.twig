@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{event.title}}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{event.title}}</h1>
+        <h3>{{event.address}}</h3>
+        <p>{{event.bio}}</p>
+        <p><b>Starts at:</b></p><p>{{event.startDate.format('l j F Y, G:i')}}</p>
+        <p><b>Ends at:</b></p><p>{{event.endDate.format('l j F Y, G:i')}}</p>
+    </div>
+
+
+{% endblock %}
+

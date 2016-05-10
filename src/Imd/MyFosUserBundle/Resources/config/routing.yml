@@ -1,0 +1,7 @@
+imd_user_profile_show_id:
+    path:     /user/{id}
+    defaults: { _controller: ImdMyFosUserBundle:Profile:showById }
+
+imd_registration_imd_role:
+    path: /imd/register
+    defaults: { _controller: ImdMyFosUserBundle:Registration:registerImd }

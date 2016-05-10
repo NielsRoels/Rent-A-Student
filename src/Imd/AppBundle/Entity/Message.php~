@@ -1,0 +1,164 @@
+<?php
+namespace Imd\AppBundle\Entity;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="message")
+*/
+class Message{
+	
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	*/
+	protected $id; //int
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="User")
+	 * @ORM\JoinColumn(name="sender_id", referencedColumnName="id")
+	*/
+	protected $senderId; //int
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="User")
+	 * @ORM\JoinColumn(name="receiver_id", referencedColumnName="id")
+	*/
+	protected $receiverId; //int
+
+	/** @ORM\Column(type="string", length=500, nullable=false) */
+	protected $message; //string 500 char
+
+	/** @ORM\Column(type="datetime", nullable=false) */
+	protected $timeAdded; //date
+
+	/** @ORM\Column(type="datetime", nullable=true) */
+	protected $timeRead; //date
+
+	/**
+	 * Get id
+	 *
+	 * @return integer
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * Get senderId
+	 *
+	 * @return \Imd\AppBundle\Entity\User
+	*/
+	public function getSenderId()
+	{
+		return $this->senderId;
+	}
+
+	/**
+	 * Set senderId
+	 *
+	 * @param \Imd\AppBundle\Entity\User $senderId
+	 * @return Message
+	*/	
+	public function setSenderId(\Imd\Appbundle\Entity\User $senderId = null)
+	{
+		$this->senderId = $senderId;
+
+		return $this;
+	}
+
+	/**
+	 * Get receiverId
+	 *
+	 * @return \Imd\AppBundle\Entity\User
+	*/
+	public function getReceiverId()
+	{
+		return $this->receiverId;
+	}
+
+	/**
+	 * Set receiverId
+	 *
+	 * @param \Imd\AppBundle\Entity\User $receiverId
+	 * @return Message
+	*/	
+	public function setReceiverId(\Imd\Appbundle\Entity\User $receiverId = null)
+	{
+		$this->receiverId = $receiverId;
+		
+		return $this;
+	}
+
+	/**
+	 * Get message
+	 *
+	 * @return string
+	*/
+	public function getMessage()
+	{
+		return $this->message;
+	}
+
+	/**
+	 * Set message
+	 *
+	 * @param string $message
+	 * @return Message
+	*/
+	public function setMessage($message)
+	{
+		$this->message = $message;
+
+		return $this;
+	}
+
+	/**
+	 * Get timeAdded
+	 *
+	 * @return \DateTime
+	*/
+	public function getTimeAdded()
+	{
+		return $this->timeAdded;
+	}
+
+	/**
+	 * Set timeAdded
+	 *
+	 * @param \DateTime $timeAdded
+	 * @return Message
+	*/
+	public function setTimeAdded($timeAdded)
+	{
+		$this->timeAdded= $timeAdded;
+		return $this;
+	}
+
+	/**
+	 * Get timeRead
+	 *
+	 * @return \DateTime
+	*/
+	public function getTimeRead()
+	{
+		return $this->timeRead;
+	}
+
+	/**
+	 * Set read
+	 *
+	 * @param \DateTime $timeRead
+	 * @return Message
+	*/ 
+	public function setTimeRead($timeRead)
+	{
+		$this->timeRead = $timeRead;
+		return $this;
+	}
+}

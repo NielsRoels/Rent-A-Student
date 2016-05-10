@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirm your booking{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="text-center">Ready to rock?</h1>
+		<small class="text-center txt-col-lightgray">
+			<p>
+				Evenement: <b>{{event.title}}</b> Gids: <b>{{user.firstname}} {{user.lastname}}</b>
+			</p>
+		</small>
+		<hr>
+
+		<div class="col-md-4 text-center">
+			<a href="{{path('imd_user_profile_show_id',{'id': user.id})}}">
+				<img src="{{user.picture}}" alt="" class="img-responsive img-thumbnail img-circle center-block user-image-medium hoverImages">
+			</a>
+			<h2>{{user.firstname}} {{user.lastname}}</h2>
+			<h4>{{user.getImdYear('full-text')}}</h4>
+			<span class="center-block">{% include "rating.html.twig" %}</span>
+			<p>{{user.specialization}}</p>
+		</div>
+
+		<div class="col-md-6 col-md-offset-2">
+	        <h1>{{event.title}}</h1>
+	        <h3>{{event.address}}</h3>
+	        <p>{{event.bio}}</p>
+	        <p><b>Starts at:</b></p><p>{{event.startDate.format('l j F Y, G:i')}}</p>
+	        <p><b>Ends at:</b></p><p>{{event.endDate.format('l j F Y, G:i')}}</p>
+	    </div>
+
+		<form action="{{path('imd_app_guide_booking_handle_confirm',{'eventID': event.id,'guideID':user.id})}}" method="POST">
+			<input type="submit" class="btn btn-large btn-default" value="Let's go!"/>
+		</form>
+	
+	</div>
+{% endblock %}

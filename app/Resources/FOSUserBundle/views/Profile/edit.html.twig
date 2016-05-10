@@ -1,0 +1,27 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% block title %}Bewerk profiel{% endblock %}
+
+{% block fos_user_content %}
+	{# {% include "FOSUserBundle:Profile:show_content.html.twig" %} #}
+
+	<div class="container padding" role="main">
+
+		<h2 class="row-title">
+			{{user.firstname}} {{user.lastname}}
+			<small>
+				Bewerk
+			</small>
+		</h2>
+
+		<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+		    {{ form_widget(form) }}
+		    <div>
+		        <input type="submit" class="btn btn-default" value="Wijzig" />
+		    </div>
+		</form>
+
+	</div>
+
+{% endblock fos_user_content %}
+

@@ -1,0 +1,20 @@
+@import "../lib/font-awesome/scss/font-awesome.scss";
+@import "../lib/bootstrap-social/bootstrap-social.scss";
+
+.loginMethods {
+	padding: 0;
+	max-width: 250px;
+
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+	li {
+		margin: 20px 0;
+	}
+}
+
+.guest-login-card {
+
+	h3 {
+		margin-top: 3px;
+	}
+}

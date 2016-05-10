@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WeAreIMD | Heroes{% endblock %}
+
+{% block body %}
+	<div class="jumbotron jumbotron-spacing">
+		<div class="container">
+			<a href="{{path('imd_user_profile_show_id',{'id': imders[0].id})}}" class="center-block">
+				<img src="{{imders[0].picture}}" alt="image" class="img-responsive img-thumbnail img-circle center-block user-image-large">
+			</a>
+			<h1 class="jumbotron-title text-center text-white">
+				Kies je Hero!
+				<p>
+					<small class="text-white center-block margin-abit-t para-action">Interactive Multimedia Design is misschien jouw ideale richting, maar je bent toch nog niet helemaal zeker? "Boek" nu één van onze IMD Heroes en beleef samen een onvergetelijke IMD-dag!</small>
+				</p>
+			</h1>
+			<div class="center-block action-container">
+				{% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+					<a href="{{path('imd_guest_login')}}" class="btn btn-default btn-action btn-ghost btn-lg center-block">
+						Boek een Hero
+					</a>
+				{% else %}
+					<a href="{{path('imd_app_guide_booking_date')}}" class="btn btn-default btn-action btn-ghost btn-lg center-block">
+						Doe mee!
+					</a>
+				{% endif %}
+				<div class="center-block margin-alil-t text-center">
+					<a href="{{path('imd_registration_imd_role')}}" class="call-secondary text-white">
+						of wordt zelf een Hero.
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid bg-col-1">
+		<div class="container">
+			<h2 class="row-title text-center">
+				<b class="brand">HEROES</b>
+			</h2>
+			<section class="col-xs-12 col-sm-4 container__section">
+				<h3 class="section__title">Hero</h3>
+				<p class="section__body">Creëer een unieke ervaring die geheel naar jouw wensen is afgesteld. Kies een Hero die bij jouw interesses aansluit of iemand die een radicaal andere richting uitgaat. Al onze Heroes helpen je vrijwillig verder met al je vragen en problemen, digitaal of face-to-face. Spreek gewoon af.</p>
+			</section>
+			<section class="col-xs-12 col-sm-4 container__section">
+				<h3 class="section__title">Tour</h3>
+				<p class="section__body">Kom langs tijdens één van onze evenementen en krijg onmiddelijk een zicht op de geweldige sfeer die IMD zo uniek maakt. Praat op je gemak met onze docenten (die samen met jou een pint drinken) of meng je onder de studenten tijdens onze Meat & Greets.</p>
+			</section>
+			<section class="col-xs-12 col-sm-4 container__section">
+				<h3 class="section__title">Feedback</h3>
+				<p class="section__body">Laat zeker en vast ook weten wat je van onze Hero vond, we helpen je graag verder als er problemen zijn ontstaan en schrikken er niet van terug om onze Heroes eens op de vingers te tikken als ze wat te laat uit bed stappen.</p>
+			</section>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="container">
+			<h2 class="row-title">
+				Onze IMD-Heroes
+			</h2>
+			{% for user in imders %}
+				 <section class="col-xs-12 col-sm-4 text-center margin-alot-t">
+					<a href="{{path('imd_user_profile_show_id',{'id': user.id})}}" class="center-block">
+						<img src="{{user.picture}}" alt="image" class="img-responsive img-thumbnail img-circle center-block user-image-medium hoverImages">
+					</a>
+					<h2 class="text-center">{{user.firstname}} {{user.lastname}}</h2>
+					{% include "rating.html.twig" %}
+					{% if user.imdYear != '' %}
+						<h4>{{user.getImdYear('full-text')}}</h4>
+					{% else %}
+						{#
+							Teacher
+							Want ge kunt ni in IMD zitten en geen jaar hebben behalve als leerkracht, maar daarvoor is het waarschijnlijk beter om een rol bij te voegen en die dan uit te lezen
+						#}
+					{% endif %}
+
+				</section>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="container-fluid bg-col-5">
+		<div class="container">
+			<h2 class="row-title">
+				Wat is <b class="brand">HEROES</b> ?
+			</h2>
+			<section class="col-xs-12 center-block">
+				<p>
+					Heb je interesse in programmeren en pixels? Dan nodigen we je graag uit om deel te nemen aan het <b class="brand">HEROES</b> programma. <b class="brand">HEROES</b> is ontworpen om iedereen die geinteresserd is in ontwerpen en ontwikkelen beter bekend te maken met de steeds groeiende mogelijkheden die het web biedt aan de hand van een interactieve tour op onze IMD campus samen met één van onze IMD Heroes.
+				</p>
+			</section>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="container">
+			<h2 class="row-title text-center txt-col-black">
+				Zin in een onvergetelijke ervaring?
+			</h2>
+			<section class="col-xs-12">
+					<div class="center-block action-container-override">
+						{% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+							<a href="{{path('imd_guest_login')}}" class="btn btn-default btn-action btn-spectre btn-lg center-block">
+								Interesse? Kies er één uit
+							</a>
+						{% else %}
+							<a href="{{path('imd_app_guide_booking_date')}}" class="btn btn-default btn-action btn-spectre btn-lg center-block">
+								Spreek af
+							</a>
+						{% endif %}
+					</div>
+			</section>
+		</div>
+	</div>
+	<div class="container-fluid bg-col-2">
+		<div class="container">
+			<h2 class="row-title">
+				Onze Experiences
+			</h2>
+			{% for b in bookings %}
+				<section class="col-xs-12 col-sm-4 container__section">
+					<h3 class="section__title">{{b.guest.firstname}}</h3>
+					<p class="section__body">{{b.feedback}}</p>
+				</section>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

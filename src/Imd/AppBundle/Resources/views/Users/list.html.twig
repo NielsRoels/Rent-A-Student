@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User list{% endblock %}
+
+{% block body %}
+	<div class="container padding">
+		<h1>Users</h1>
+		<p>Overview of all registered users. Use the "IMD" button on the right hand side to indicate whether or not a user is part of the course.</p>
+		<form class="searchUser" method="post" action="{{ path('imd_app_admin_finduser') }}">   
+		    <input type="text" name="name" class="form-control">
+		    <button type="submit" class="btn btn-default searchUser_btn">Search user</button>  
+		</form>
+		<hr/>
+		<ul class="media-list">
+			{% for user in users %}
+				<li class="media userlist">
+					<div class="media-left">
+						<a href="{{path('imd_user_profile_show_id',{'id': user.id})}}">
+							<img class="img-circle user-image-small" src="{{ user.picture }}" />
+						</a>
+					</div>
+					<div class="media-body">
+						<div class="info">
+							<p class="name">
+								<h3>
+								<span class="first_name">{{ user.firstName }}</span>
+								<span class="last_name">{{ user.lastName }}</span>
+								{% if user.enabled == 0 %}
+									<span>Deze gebruiker is niet langer actief</span>
+								{% endif %}
+								</h3>
+								{% for role in user.roles %}
+									<span class="label label-primary">{{ role }}</span>
+								{% endfor %}
+							</p>
+
+							{% if NULL != user.imdYear %}
+								<p class="imd-year">
+									{{ user.imdYear }}{% if 1 == user.imdYear %}ste {% else %}de {% endif %} jaar IMD
+								</p>
+							{% endif %}
+							
+							<div class="forceLeft">{% include "rating.html.twig" %}</div>
+						</div>
+						<form class="actions" method="post" action="{{path('imd_app_admin_deleteuser')}}">
+							<input type="hidden" name="deleteId" value="{{user.id}}"/>
+							<input type="hidden" name="status" value="{{user.enabled}}">
+							{% if user.enabled == 0 %}
+								<button class="btn btn-default users-btn-vcenter margin-alil-l" type="submit">Gebruiker activeren</button>
+							{% else %}
+								<button class="btn btn-dange users-btn-vcenter margin-alil-l" type="submit">Gebruiker deactiveren</button>
+							{% endif %}
+						</form>
+						<form class="actions" method="post" action="{{ path('imd_app_admin_make_admin') }}">
+							<input type="hidden" name="userId" value="{{ user.id }}"/>
+							{% if false != user.hasRole('ROLE_ADMIN') %}
+								{% if user.enabled == 1 %}
+									<button class="btn btn-success users-btn-vcenter margin-alil-l" type="submit">Admin</button>
+								{% else %}
+									<button class="btn btn-success users-btn-vcenter margin-alil-l" disabled="disabled" type="submit">Admin</button>
+								{% endif %}
+							{% else %}
+								{% if user.enabled == 1 %}
+									<button class="btn btn-default users-btn-vcenter margin-alil-l" type="submit">Admin</button>
+								{% else %}
+									<button class="btn btn-default users-btn-vcenter margin-alil-l" disabled="disabled" type="submit">Admin</button>
+								{% endif %}
+							{% endif %}
+						</form>
+						<form class="actions" method="post" action="{{ path('imd_app_admin_make_imd') }}">
+							
+							<input type="hidden" name="userId" value="{{ user.id }}" />
+
+							{% if false != user.hasRole('ROLE_IMD') %}
+								{% if user.enabled == 1 %}
+									<button class="btn btn-success users-btn-vcenter" type="submit">IMD</button>
+								{% else %}
+									<button class="btn btn-success users-btn-vcenter" disabled="disabled" type="submit">IMD</button>
+								{% endif %}
+							{% else %}
+								{% if user.enabled == 1 %}
+									<button class="btn btn-default users-btn-vcenter" type="submit">IMD</button>
+								{% else %}
+									<button class="btn btn-default users-btn-vcenter margin-alil-l" disabled="disabled" type="submit">IMD</button>
+								{% endif %}
+							{% endif %}	
+						</form>
+					</div>
+				</li>
+				<hr/>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

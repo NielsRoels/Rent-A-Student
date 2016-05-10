@@ -1,0 +1,10 @@
+services:
+    imd_myfosuser.profile.edit.type:
+        class: Imd\MyFosUserBundle\Form\Type\ProfileFormType
+        tags:
+            - { name: form.type, alias: imd_myfosuser_profile_edit }
+
+    imd_myfosuser.imdregistration.form.type:
+        class: Imd\MyFosUserBundle\Form\Type\ImdRegistrationFormType
+        tags:
+            - { name: form.type, alias: imd_myfosuser_imd_register }

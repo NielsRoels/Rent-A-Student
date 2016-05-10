@@ -1,0 +1,68 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+{% block title %}{{user.firstname}}'s Profile{% endblock %}
+
+{% block fos_user_content %}
+	<div class="container-fluid">
+		<div class="container">
+			<section class="col-xs-12 col-sm-4">
+				<img src="{{user.picture}}" alt="image" class="img-responsive img-thumbnail img-circle center-block user-image-medium">
+				<h2 class="text-center">{{user.firstname}} {{user.lastname}}</h2>
+				{% include "rating.html.twig" %}
+
+				{% if not app.user or user.id != app.user.id %}
+					<div class="center-block action-container">
+						<a href="{{ path('imd_app_messages_conversation',{'partnerId': user.id})}}" class="btn btn-spectre btn-action center-block">
+							Send me a message!
+						</a>
+					</div>
+				{% endif %}
+			</section>
+			<section class="col-xs-12 col-sm-8">
+				<h1>Wie is {{user.firstname}}?</h3>
+				<p>{{user.bio}}</p>
+
+				<h3 class="profile-specialization-row">
+					{% if user.specialization == "" %}
+					{% elseif user.specialization == "development" %}
+					<span class="glyphicon txt-col-lightgray gi-h3 glyphicon-cog"></span>
+					<span>Developer</span>
+					{% else %}
+					<span class="glyphicon txt-col-lightgray gi-h3 glyphicon-pencil"></span>
+					<span>Designer</span>
+					{% endif %}
+				</h3>
+
+                <h3 class="profile-city-row">
+                    <span class="glyphicon txt-col-lightgray gi-h3 glyphicon-tower"></span>
+                    <span>{{user.getImdYear('text')}} jaar</span>
+                </h3>
+
+                <h3 class="profile-city-row">
+                    <span class="glyphicon txt-col-lightgray gi-h3 glyphicon-gift"></span>
+                    <span>{{user.dateOfBirth|date('d/m/Y')}}</span>
+                </h3>
+
+				<h3 class="profile-city-row">
+					<span class="glyphicon txt-col-lightgray gi-h3 glyphicon-globe"></span>
+					<span>{{user.city}}</span>
+				</h3>
+
+				<h3 class="profile-city-row">
+					<span class="glyphicon txt-col-lightgray gi-h3 glyphicon-envelope"></span>
+					<span>{{user.username}}</span>
+				</h3>
+
+                <h3 class="profile-website-row">
+                    <span class="glyphicon txt-col-lightgray gi-h3 glyphicon-link"></span>
+                    <span><a class="txt-col-5" href="{{user.website}}">{{user.website}}</a></span>
+                </h3>
+				{% if app.user and user.id == app.user.id %}
+                	<h3>
+	                	<span class="glyphicon txt-col-lightgray gi-h3 glyphicon-wrench"></span>
+	                	<span><a href="{{ path('fos_user_profile_edit') }}">Edit profile</a></span>
+                	</h3>
+                {% endif %}
+			</section>
+		</div>
+	</div>
+{% endblock fos_user_content %}

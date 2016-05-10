@@ -1,0 +1,90 @@
+Imd\AppBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        facebook_id:
+            - Type: string
+            - Length:
+                max: 255
+        facebook_access_token:
+            - Type: string
+            - Length:
+                max: 255
+        twitter_id:
+            - Type: string
+            - Length:
+                max: 255
+        twitter_access_token:
+            - Type: string
+            - Length:
+                max: 255
+        github_id:
+            - Type: string
+            - Length:
+                max: 255
+        github_access_token:
+            - Type: string
+            - Length:
+                max: 255
+        google_id:
+            - Type: string
+            - Length:
+                max: 255
+        google_access_token:
+            - Type: string
+            - Length:
+                max: 255
+        gender:
+            - Type: string
+        firstName:
+            - Type: string
+            - Length:
+                max: 80
+            - NotBlank: 
+                message: Voornaam mag niet leeg zijn.
+        lastName:
+            - Type: string
+            - Length:
+                max: 80
+            - NotBlank: 
+                message: Achternaam mag niet leeg zijn.
+        website:
+            - Type: string
+            - Length: 
+                max: 140
+        city:
+            - Type: string
+            - Length: 
+                max: 140
+        picture:
+            - Type: string
+            - Length: 
+                max: 240        
+        bio:
+            - Type: string
+            - Length: 
+                max: 240
+        dateOfBirth:
+            - Date: ~ 
+        imdYear:
+            - Type: integer
+
+AppBundle\Entity\Booking:
+    properties:
+        id:
+            - Type: integer
+            - NotNull: 
+        meetTime:
+            - DateTime: ~
+            - NotNull: ~
+        place:
+            - Type: string
+            - Length:
+                max: 120
+            - NotNull: ~
+        feedback:
+            - Type: string
+            - Length:
+                max: 240
+        rating:
+            - Type: integer

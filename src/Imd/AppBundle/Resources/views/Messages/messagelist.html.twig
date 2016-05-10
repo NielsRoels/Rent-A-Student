@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+    <div class="container padding">
+        <section class="col-xs-12 col-sm-8">
+            <h1>Berichtencentrum</h1>
+            <p>
+                Chat hier met je gids of medestudenten. Klik op één van de onderstaande gesprekken om verder te praten, of zoek een gebruiker op voor- of achternaam om er een gesprek mee te beginnen.
+            </p>
+        </section>
+        <section class="col-xs-12 col-sm-4">
+            <form class="searchPartner" method="post" action="{{path('imd_app_messages_searchpartner')}}">
+                <input type="text" name="name" class="form-control margin-alot-t">
+                <button type="submit" class="btn btn-default searchUser_btn">Zoek partner</button>
+            </form>
+        </section>
+        <section class="col-xs-12">
+            <hr>
+            <ul class="media-list row">
+                {% if partners is defined %}
+                    {% for partner in partners %}
+                        <li class="media userlist">
+                            <div class="media-left">
+                                <a href="">
+                                    <img src="{{partner.picture}}" class="img-circle user-image-small">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="info">
+                                    <p class="name">
+                                    <h3>
+                                        <span class="first_name">{{partner.firstName}}</span>
+                                        <span class="last_name">{{partner.lastName}}</span>
+                                    </h3>
+                                    </p>
+                                </div>
+                                <a href="{{ path('imd_app_messages_conversation',{'partnerId': partner.id})}}" class="btn btn-default actions">Stuur een bericht</a>
+                            </div>
+                        </li>
+                        <hr>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </section>
+        <section class="col-xs-12 col-sm-6">
+        <ul class="media-list">
+            <h2>Nieuwe berichten</h2>
+            <small>
+                <p class="txt-col-lightgray">
+                    Hier zie je alle nieuwe berichten.
+                </p>
+            </small>
+            {% if news | length > 0 %}
+                {% for new in news %}
+                    <li class="userlist message_li col-xs-12 col-sm-6">
+                        <img src="{{new.sender.picture}}" class="img-responsive img-thumbnail img-circle user-image-small center-block border-col-gold">
+                        <div>
+                            <h1 class="message_name text-center txt-col-5">{{new.sender.firstName}} {{new.sender.lastName}}</h1>
+                        </div>
+                        <div class="action-container center-block">
+                            <a href="{{path('imd_app_messages_conversation',{'partnerId': new.sender.id})}}" class="btn btn-spectre center-block">Lees</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            {% else %}
+                Geen nieuwe berichten
+            {% endif %}
+        </ul>
+        </section>
+        <section class="col-xs-12 col-sm-6">
+        <ul class="media-list">
+
+            {% if conversations | length > 0 %}
+                <h2>Alle berichten</h2>
+                <small>
+                    <p class="txt-col-lightgray">
+                        Hier zie je een overzicht van alle gesprekken.
+                    </p>
+                </small>
+                {% for conversation in conversations %}
+
+                    {# User is ontvanger --> toon zender #}
+                    {% if loggedInUser.id == conversation.0.receiver.id %}
+                        <li class="userlist message_li col-xs-12 col-sm-6">
+                            <img src="{{conversation.0.sender.picture}}" class="img-responsive img-thumbnail img-circle user-image-small center-block">
+                            <div class="center-block text-center">
+                                <h1 class="message_name">{{conversation.0.sender.firstName}} {{conversation.0.sender.lastName}}</h1>
+                            </div>
+                            <div class="action-container center-block">
+                                <a href="{{path('imd_app_messages_conversation',{'partnerId': conversation.0.sender.id})}}" class="btn btn-spectre center-block">Lees alle berichten</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="userlist message_li col-xs-12 col-sm-6">
+                            <img src="{{conversation.0.receiver.picture}}" class="img-responsive img-thumbnail img-circle user-image-small center-block">
+                            <div class="center-block text-center">
+                                <h1 class="message_name">{{conversation.0.receiver.firstName}} {{conversation.0.receiver.lastName}}</h1>
+                            </div>
+                            <div class="action-container center-block">
+                                <a href="{{path('imd_app_messages_conversation',{'partnerId': conversation.0.receiver.id})}}" class="btn btn-spectre center-block">Lees alle berichten</a>
+                            </div>
+                        </li>
+
+                    {% endif %}
+
+
+                {% endfor %}
+            {% else %}
+                Geen berichten
+            {% endif %}
+        </ul>
+        </section>
+    </div>
+{% endblock %}

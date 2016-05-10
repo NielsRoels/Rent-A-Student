@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kies uw IMD-hero!{% endblock %}
+
+{% block body %}
+	
+	<div class="container padding">
+		<h1 class="text-center">Kies uw IMD-Hero!</h1>
+		<small class="text-center txt-col-lightgray">
+			<p>
+				Evenement: <b>{{event.title}}</b>
+			</p>
+		</small>
+		<hr>
+		<ul class="list-unstyled guides">
+			{% for user in users %}
+				<li class="col-md-4 text-center">
+					<a href="{{path('imd_user_profile_show_id',{'id': user.id})}}">
+						<img src="{{user.picture}}" alt="" class="img-responsive img-thumbnail img-circle center-block user-image-medium hoverImages">
+					</a>
+					<h2>{{user.firstname}} {{user.lastname}}</h2>
+					<h4>{{user.getImdYear('full-text')}}</h4>
+					<span class="center-block">{% include "rating.html.twig" %}</span>
+					<p>{{user.specialization}}</p>
+					<a href="{{path('imd_app_guide_booking_confirm',{'eventID': eventID,'guideID': user.id})}}" class="btn btn-spectre btn-action">Kies {{user.firstname}}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

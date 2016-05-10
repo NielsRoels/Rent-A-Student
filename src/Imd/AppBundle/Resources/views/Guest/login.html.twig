@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bezoeker registratie{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="guest-login-card col-md-6">
+            <h2>Joepie, jij wilt IMD bezoeken?</h2>
+            <h3>Vertel ons even wie je bent.</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam blanditiis labore rem facere consequuntur ipsam ea perspiciatis est aut, explicabo velit quod mollitia voluptatem laudantium magni eum accusantium, provident vitae.
+            </p>
+            <ul class=" media-list loginMethods">
+                <li>
+                    <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook'}) }}" class="btn btn-block btn-social btn-facebook btn-lg">
+                        <i class="fa fa-facebook"></i> Login via facebook
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h2>Enkele reacties na een bezoek:</h2>
+            <ul>
+                {% for b in bookings %}
+                    <li>
+                        <h4 class="section__title">{{b.guest.firstname}}</h4>
+                        <p class="section__body">{{b.feedback}}</p>
+                    </li>   
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

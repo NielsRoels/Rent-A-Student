@@ -1,0 +1,15 @@
+<p class="rating center-block text-center">
+	{% if false != user.rating %}
+		{% for i in 1..5 %}
+			<script>console.log("1");</script>
+			{% if i <= user.rating %}
+					<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+				{% else %}
+					<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+			{% endif %}
+		{% endfor %}
+		<span class="pad-l-5 txt-col-black">{{user.rating}}</span>
+	{% else %}
+	<span class="txt-col-black text-center center-block">Rookie Guide</span>
+	{% endif %}
+</p>

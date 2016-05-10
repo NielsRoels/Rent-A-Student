@@ -1,0 +1,11 @@
+{% block title %}Login{% endblock %}
+
+<div class="container padding" role="main">
+
+	<h2>Uw profiel</h2>
+	<div class="fos_user_user_show">
+		<p>Gebruikersnaam: {{ user.username }}</p>
+		<p>Email: {{ user.email }}</p>
+		<p>Voornaam: {{ user.firstName }}</p>
+	</div>
+</div>

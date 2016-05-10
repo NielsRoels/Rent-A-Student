@@ -1,0 +1,17 @@
+.navbar-brand{
+	letter-spacing: 0.2ex;
+	font-size: 2.5ex;
+	text-transform: uppercase;
+	transform-origin: center center;
+
+	/* CSS Transition */
+	-webkit-transition: letter-spacing .2s ease-in-out;
+	-moz-transition: letter-spacing .2s ease-in-out;
+	-ms-transition: letter-spacing .2s ease-in-out;
+	-o-transition: letter-spacing .2s ease-in-out;
+	transition: letter-spacing .2s ease-in-out;
+
+	&:hover{
+		letter-spacing: 1.35ex;
+	}
+}

@@ -1,0 +1,19 @@
+{
+  "name": "php1-team2-rent-a-student",
+  "version": "0.0.0",
+  "authors": [
+    "JasperDS <jasp.desmet@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.4",
+    "bootstrap-social": "~4.9.0"
+  }
+}

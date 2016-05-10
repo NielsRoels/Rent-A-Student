@@ -1,0 +1,164 @@
+#FosUserBundle Routes
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+
+#HWIOAuthBundle routes
+hwi_oauth_security:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix: /login
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix: /login
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /login
+
+facebook_login:
+    pattern: /login/check-facebook
+
+google_login:
+    pattern: /login/check-google
+
+twitter_login:
+    pattern: /login/check-twitter
+
+github_login:
+    pattern: /login/check-github
+
+# Eigen routes!
+imd_app_homepage:
+    path:     /
+    defaults: { _controller: ImdAppBundle:Default:index }
+
+imd_guest_login:
+    path:     /guest/login
+    defaults: { _controller: ImdAppBundle:Guest:login }
+
+imd_app_guide_booking_date:
+    path:     /book
+    defaults: { _controller: ImdAppBundle:Guide:chooseDate }
+
+imd_app_guide_list:
+    path:     /book/{eventID}
+    defaults: { _controller: ImdAppBundle:Guide:listGuides }
+
+imd_app_guide_booking_confirm:
+    path:     /book/{eventID}/{guideID}
+    defaults: { _controller: ImdAppBundle:Guide:confirm }
+    methods:  [GET]
+
+imd_app_guide_booking_handle_confirm:
+    path:     /book/{eventID}/{guideID}
+    defaults: { _controller: ImdAppBundle:Guide:handleConfirm }
+    methods:  [POST]
+
+imd_app_guide_booking_rate:
+    path:     /booking/{id}/rate
+    defaults: { _controller: ImdAppBundle:Booking:rateBooking }
+    methods:  [GET]
+
+imd_app_guide_booking_handle_rate:
+    path:     /booking/{id}/rate
+    defaults: { _controller: ImdAppBundle:Booking:handleRateBooking }
+    methods:  [POST]
+
+imd_app_guide_booking_admin_feedback_answer:
+    path:     /admin/booking/{id}/rate
+    defaults: { _controller: ImdAppBundle:Booking:handleFeedbackAnswer }
+    methods:  [POST]
+
+imd_app_guide_booking_feedback_mail:
+    path:     /admin/booking/mail
+    defaults: { _controller: ImdAppBundle:Booking:askFeedbackMail }
+
+#admin 
+imd_app_adminhomepage:
+    pattern: /admin
+    defaults:  { _controller: ImdAppBundle:Admin:index }
+
+imd_app_admin_userlist:
+    path: /admin/users
+    defaults: { _controller: ImdAppBundle:Users:listUsers}
+
+imd_app_admin_finduser:
+    pattern: /admin/find-user
+    defaults:  { _controller: ImdAppBundle:Users:findUser }
+
+imd_app_admin_deleteuser:
+    pattern: /admin/delete-user
+    defaults: { _controller: ImdAppBundle:Users:deleteUser }
+
+imd_app_admin_make_imd:
+    path: /admin/make-imd
+    defaults: { _controller: ImdAppBundle:Users:makeImd}
+
+imd_app_admin_list:
+    path: /admin/admins
+    defaults: { _controller: ImdAppBundle:Admin:adminList}
+
+imd_app_admin_make_admin:
+    path: /admin/make-admin
+    defaults: { _controller: ImdAppBundle:Admin:makeAdmin}
+
+imd_app_manage:
+    pattern: /admin/manage
+    defaults:  { _controller: ImdAppBundle:Admin:adminadd }
+
+imd_app_adminlogin:
+    pattern: /admin/login
+    defaults:   { _controller: ImdAppBundle:Admin:adminlogin}
+
+imd_app_adminlistbookings:
+    pattern: /admin/bookings
+    defaults: {_controller: ImdAppBundle:Admin:adminlistbookings}
+
+imd_app_admin_create_event:
+    pattern: /event/create
+    defaults: {_controller: ImdAppBundle:Event:createEvent}
+
+imd_event_by_id:
+    pattern: /event/{id}
+    defaults: {_controller: ImdAppBundle:Event:getEventById}
+
+#messages
+imd_app_messages_messagelist:
+    pattern: /messages/list
+    defaults: {_controller: ImdAppBundle:Message:listMessages}
+
+imd_app_messages_searchpartner:
+    pattern: /messages/search-partner
+    defaults: {_controller: ImdAppBundle:Message:searchPartner}
+
+imd_app_messages_conversation:
+    pattern: /messages/conversation/{partnerId}
+    defaults: {_controller: ImdAppBundle:Message:showConversation}
+    methods: [GET]
+
+imd_app_message_add_message:
+    pattern: /message/addmessage
+    defaults: {_controller: ImdAppBundle:Message:addMessage}
+    requirements:
+        _method: POST
+
+#booking
+imd_app_booking_list:
+    pattern: /booking/list
+    defaults: {_controller: ImdAppBundle:Booking:listBooking}

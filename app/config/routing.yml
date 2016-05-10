@@ -1,0 +1,7 @@
+imd__my_fos_user:
+    resource: "@ImdMyFosUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+imd_app:
+    resource: "@ImdAppBundle/Resources/config/routing.yml"
+    prefix:   /

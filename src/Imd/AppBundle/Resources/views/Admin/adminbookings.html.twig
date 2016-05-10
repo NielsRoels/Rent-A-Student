@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bookings index{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Beheer alle boekingen</h1>
+		<small>
+			<p class="text-muted">
+				Hier vind u een overzicht van alle boekingen die in het systeem opgenomen zijn.
+			</p>
+		</small>
+		<hr>
+		<ul class="media-list">
+			{% for booking in bookings %}
+					<li class="media userlist">
+						<div class="media-left">
+							<a href="{{path('imd_user_profile_show_id',{'id': booking.guide.id})}}">
+								<img class="img-circle user-image-small" src="{{ booking.guide.picture }}" />
+							</a>
+						</div>
+						<div class="media-body">
+							<div class="info">
+								<p class="name">
+									<h3>
+										<span class="first_name">{{booking.guide.firstName}}</span>
+										<span class="last_name">{{booking.guide.lastName}}</span>
+									</h3>
+								</p>
+								<span class="place"><strong>{{booking.place}}</strong></span><br>
+								<span class="time">{{booking.meetTime.format('l j F Y, G:i')}}</span>
+							</div>
+							<a href="{{path('imd_app_guide_booking_rate', {'id': booking.id})}}" class="btn btn-default actions">Beoordeel de rondleiding</a>
+						</div>
+					</li>
+				<hr>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

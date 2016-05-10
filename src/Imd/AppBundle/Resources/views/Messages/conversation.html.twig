@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conversation{% endblock %}
+
+{% block body %}
+	<div class="container padding">
+		<a href="{{path('imd_app_messages_messagelist')}}" class="btn btn-default">Terug naar alle berichten</a>
+		{% for message in messages %}
+			{% if (message.sender.id != app.user.id) and (partner is not defined) %}
+				{% set partner = message.sender.id %}
+					<h1>{{message.sender.firstName}} {{message.sender.lastName}}</h1>
+			{% elseif (message.receiver.id != app.user.id) and (partner is not defined) %}
+				{% set partner = message.receiver.id %}
+					<h1>{{message.receiver.firstName}} {{message.receiver.lastName}}</h1>
+			{% endif %}
+		{% endfor %}
+		<form id="messageForm" method="post" action="{{path('imd_app_message_add_message', {'id': app.request.query.get("id")})}}">
+			<div class="form-group">
+				<input type="hidden" name="receiver" id="receiver" value="{{partnerId}}">
+				<textarea class="form-control" rows="3" name="message" id="message" placeholder="Vul hier uw bericht in ..."></textarea>
+				<button class="btn btn-default message_btn" type="submit">Verzenden</button>
+				{# {% for message in messages %}
+					{% if (message.sender.id != app.user.id) and (partner is not defined) %}
+						{% set partner = message.sender.enabled %}
+							{% if partner == 1 %}
+								<button class="btn btn-default message_btn" type="submit">Verzenden</button>
+							{% else %}
+								<button class="btn btn-default message_btn" disabled="disabled" type="submit">Verzenden</button>
+								<span>Deze gebruiker is niet langer actief</span>
+							{% endif %}
+					{% elseif (message.receiver.id != app.user.id) and (partner is not defined) %}
+						{% set partner = message.receiver.enabled %}
+							{% if partner == 1 %}
+								<button class="btn btn-default message_btn" type="submit">Verzenden</button>
+							{% else %}
+								<button class="btn btn-default message_btn" disabled="disabled" type="submit">Verzenden</button>
+								<span>Deze gebruiker is niet langer actief</span>
+							{% endif %}
+					{% endif %}
+				{% endfor %} #}
+			</div>
+		</form>
+		<ul id="chatMessage" class="media-list message_clear">
+			{% for message in messages %}
+				{% if message.sender.id == app.user.id %}
+					<li class="message_text me bg-col-2">
+						<span>{{message.sender.firstName}}</span>
+						<p>{{message.message}}</p>
+					</li>
+				{% else %}
+					<li class="message_text them bg-col-5">
+						<span >{{message.sender.firstName}}</span>
+						<p >{{message.message}}</p>
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="{{asset('js/script.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Heroes | Controlepaneel{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Controlepaneel</h1>
+		<small>
+			<p class="txt-col-lightgray">
+				Hieronder een oplijsting van alle functionaliteit waartoe je beschikt als administrator.
+			</p>
+		</small>
+		<hr>
+		<section class="col-xs-12 col-sm-4 text-center">
+			<a href="{{ path('imd_app_admin_make_imd') }}" class="url-dashboard">
+	            <span class="glyphicon txt-col-2 glyphicon-knight gi-dashboard"></span>
+	            <h4>Beheer Gebruikers</h4>
+	            <small class="txt-col-lightgray">
+            		<p>Beheer alle geregistreerde gebruikers.</p>
+            	</small>
+	        </a>
+		</section>
+		<section class="col-xs-12 col-sm-4 text-center">
+			<a href="{{ path('imd_app_adminlistbookings') }}" class="url-dashboard">
+            	<span class="glyphicon txt-col-2 glyphicon-eye-open gi-dashboard"></span>
+            	<h4>Beheer Boekingen</h4>
+            	<small class="txt-col-lightgray">
+            		<p>Bekijk alle geplande boekingen.</p>
+            	</small>
+            </a>
+		</section>
+		<section class="col-xs-12 col-sm-4 text-center">
+			<a href="{{ path('imd_app_admin_create_event') }}" class="url-dashboard">
+            	<span class="glyphicon txt-col-2 glyphicon-flash gi-dashboard"></span>
+            	<h4>Nieuw Evenement </h4>
+            	<small class="txt-col-lightgray">
+            		<p>Creeër een nieuw evenement waarop gidsen aanwezig zijn.</p>
+            	</small>
+        	</a>
+		</section>
+	</div>
+{% endblock %}

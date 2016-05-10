@@ -1,0 +1,111 @@
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+img.hoverImages {
+  margin:25px auto;
+  -webkit-transition: margin 0.5s ease-in;
+  -moz-transition: margin 0.5s ease-in;
+  -o-transition: margin 0.5s ease-in;
+}
+
+img.hoverImages:hover {
+  cursor:pointer;
+  margin-top: 5px;
+}
+
+.message_clear
+{
+	overflow: auto;
+}
+
+.message_li
+{
+	overflow: auto;
+	margin: 10px 0 0 0;
+}
+
+.message_name
+{
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.message_text
+{
+	width: 50%;
+	border-radius: 5px;
+	position: relative;
+	margin-top: 10px;
+	
+	span
+	{
+		margin: 10px;
+		font-weight: bold;
+	}
+
+	p
+	{
+		margin: 10px;
+	}
+}
+
+.message_text:first-child
+{
+	margin-top: 0;
+}
+
+.me, .them
+{
+	color: white;
+	box-sizing: border-box;
+	padding: 1.2%;
+}
+
+.me{
+	background-color: $color1;
+	float: right;
+	margin-left: 50%;
+}
+
+.them
+{
+	background-color: $color2;
+	float: left;
+	margin-right: 50%;
+}
+
+.message_btn
+{
+	margin: 10px 0 0 0;
+}

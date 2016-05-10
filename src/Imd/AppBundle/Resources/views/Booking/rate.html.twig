@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Selecteer een datum!{% endblock %}
+
+{% block body %}
+
+    <div class="container padding">
+
+<!--         <div class="col-md-4 guide-card">
+            <a href="{{path('imd_user_profile_show_id',{'id': booking.guide.id})}}">
+                <img src="{{booking.guide.picture}}" alt="" class="img-responsive img-thumbnail img-circle center-block">
+            </a>
+            <h2>{{booking.guide.firstname}} <small>{{booking.guide.lastname}}</small></h2>
+            <h4>{{booking.guide.getImdYear('full-text')}} {% set vars = {'user': booking.guide} %} {% include "rating.html.twig" with vars %}</h4>
+            <p>development</p>
+        </div> -->
+
+        <div class="col-md-4 text-center center-block">
+            <a href="{{path('imd_user_profile_show_id',{'id': booking.guide.id})}}">
+                <img src="{{booking.guide.picture}}" alt="" class="img-responsive img-thumbnail img-circle center-block user-image-large">
+            </a>
+            <h2>{{booking.guide.firstname}} {{booking.guide.lastname}}</h2>
+            <h4>{{booking.guide.getImdYear('full-text')}}</h4>
+            <p>{{booking.guide.specialization}}</p>
+            <span class="center-block">{% set vars = {'user': booking.guide} %} {% include "rating.html.twig" with vars %}</span>
+        </div>
+
+        <div class="col-md-8">
+            <h1>Beoordeling uw rondleiding: </h1>
+            <ul>
+                <li>Datum: {{booking.meetTime | date("m/d/Y")}}</li>
+                <li>Plaats: {{booking.place}}</li>
+            </ul>
+            <form method="POST" action="{{path('imd_app_guide_booking_handle_rate', {'id': booking.id})}}">
+                 <div class="form-group">
+                    <label for="rating">Beoordeling:</label>
+                    <div class="input-group col-md-2">
+                        <input type="number" name="rating" class="form-control" id="rating" placeholder="5" {{ booking.rating or loggedinUser.id != booking.guest.id ? 'disabled' : '' }}  value="{{ booking.rating ? booking.rating : '' }}" />
+                        <div class="input-group-addon"> / 5 </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="feedback">Feedback:</label>
+                    <textarea class="form-control" name="feedback" id="feedback" placeholder="Feedback" {{ booking.feedback or loggedinUser.id != booking.guest.id ? 'disabled' : '' }}>{{ booking.feedback ? booking.feedback : '' }}</textarea>
+                </div>
+
+                {% if not booking.rating and not booking.feedback and loggedinUser.id == booking.guest.id %}
+                    <button type="submit" class="btn btn-default">Submit</button>
+                {% endif %}
+                
+            </form>
+            
+            <form method="POST" action="{{path('imd_app_guide_booking_admin_feedback_answer', {'id': booking.id})}}">
+                <div class="form-group">
+                    <label for="feedbackAnswer">Admin feedback:</label>
+                    <textarea class="form-control" name="feedbackAnswer" id="feedbackAnswer" placeholder="Feedback" {{ booking.feedBackAnswer or loggedinUser.hasRole('ROLE_ADMIN') == false ? 'disabled' : '' }}>{{ booking.feedBackAnswer ? booking.feedBackAnswer.comment : '' }}</textarea>
+                </div>
+
+                {% if not booking.feedBackAnswer and loggedinUser.hasRole('ROLE_ADMIN')%}
+                    <button type="submit" class="btn btn-default">Submit</button>
+                {% endif %}
+            
+            </form>
+        </div>
+    </div>
+    
+{% endblock %}
+

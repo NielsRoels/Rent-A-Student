@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add admin{% endblock %}
+
+{% block body %}
+	<div class="container padding">
+		<h1>Admin</h1>
+		<p>Search for a registered user by first name of last name and give them admin-rights by clicking on the "Admin" button on the right hand side.</p>	
+		<form class="searchUser" method="post" action="{{ path('imd_app_manage') }}">   
+		    <input type="text" name="name" class="form-control">
+		    <button type="submit" class="btn btn-default searchUser_btn">Search user</button>  
+		</form>
+		<hr>
+		<ul class="media-list">
+			{% if users is defined %}
+				{% for user in users %}
+					<li class="media userlist">
+						<div class="media-left">
+							<a href="">
+								<img class="img-circle user-image-small" src="{{ user.picture }}" />
+							</a>
+						</div>
+						<div class="media-body">
+							<div class="info">
+								<p class="name">
+									<h3>
+									<span class="first_name">{{ user.firstName }}</span>
+									<span class="last_name">{{ user.lastName }}</span>
+									</h3>
+								</p>
+							</div>
+							<form class="actions" method="post" action="{{ path('imd_app_admin_make_admin') }}">
+								<input type="hidden" name="userId" value="{{ user.id }}"/>
+								{% if false != user.hasRole('ROLE_ADMIN') %}
+									<button class="btn btn-success" type="submit">Admin</button>
+								{% else %}
+									<button class="btn btn-default" type="submit">Admin</button>
+								{% endif %}
+							</form>
+						</div>
+					</li>
+					<hr>
+				{% endfor %}
+			{% else %}
+				<li>
+					<p>No matching user found!</p>
+				</li>
+			{% endif %}
+		</ul>
+	</div>
+{% endblock %}
